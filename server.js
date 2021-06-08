@@ -8,6 +8,12 @@ dotenv.config({path:'config.env'})
 app.get('/', (req,res)=>{
     res.render("index"); //no need write the file extendtion and exact path as we set the view engine already
 })
+app.get('/add-user', (req,res)=>{
+    res.render("add_user"); //no need write the file extendtion and exact path as we set the view engine already
+})
+app.get('/update', (req, res)=>{
+    res.render("update")
+})
 const PORT =process.env.PORT||3000
 //print log requests message
 app.use(morgan('tiny'))
