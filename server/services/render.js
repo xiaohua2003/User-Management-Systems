@@ -1,5 +1,13 @@
+const axios=require('axios')
 exports.homeRoutes=(req,res)=>{
-    res.render('index')//no need write the file extendtion and exact path as we set the view engine already
+    //make a get request to/api/users  
+    axios.get("http://localhost:3000/api/users").then(function(response){
+        res.render('index', {users:response.data})//no need write the file extendtion and exact path as we set the view engine already
+    })
+    .catch(err=>{
+        res.send(err)
+    })
+    
 }
 exports.add_user= (req,res)=>{
     res.render("add_user"); //no need write the file extendtion and exact path as we set the view engine already
