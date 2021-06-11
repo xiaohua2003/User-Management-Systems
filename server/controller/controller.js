@@ -2,7 +2,7 @@ var Userdb=require('../model/model');
 //Create and Save new user
 exports.create=(req,res)=>{
     //validate request
-    if(req.body){
+    if(!req.body){
         res.status(400).send({message:"Content can not be empty!"});
         return;
     }
@@ -14,7 +14,9 @@ exports.create=(req,res)=>{
         phone:req.body.phone,
     })
     //save user in the database
-    user.save(user).then(data=>{res.send(data)})
+    user.save(user).then(data=>{res.send(data)
+    //res.redirect('/add-user');
+    })
         .catch(err=>{
         res.status(500).send({message:err.message||"some error occurred while creating a create operation"})
     }); }
@@ -44,11 +46,11 @@ exports.find=(req,res)=>{
 }
 //update a new identified user by user id
 exports.update=(req,res)=>{
-    if(req.body){
+    if(!req.body){
         return res.status(400).send({message:"Data to update can not be empty"})
     }
     const id=req.params.id;
-    Userdb.findByIdAndUpdate(id.req.body, {useFindAndModify:false})
+    Userdb.findByIdAndUpdate(id, req.body, {useFindAndModify:false})
     .then(data=>{
         if(!data){
            res.status(404).send({message:`can not update user ${id}.Maybe user not found!`})
