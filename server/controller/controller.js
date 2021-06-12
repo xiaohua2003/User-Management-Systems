@@ -10,12 +10,13 @@ exports.create=(req,res)=>{
     const user=new Userdb({
         name:req.body.name,
         email:req.body.email,
-        gender:req.body.gender,
         phone:req.body.phone,
+        gender:req.body.gender
     })
     //save user in the database
-    user.save(user).then(data=>{res.send(data)
-    //res.redirect('/add-user');
+    user.save(user).then(data=>{
+        //res.send(data)
+    res.redirect('/add-user');
     })
         .catch(err=>{
         res.status(500).send({message:err.message||"some error occurred while creating a create operation"})
@@ -39,9 +40,7 @@ exports.find=(req,res)=>{
     .catch(err=>{
         res.status(500).send({message:err.message||'Error Occur while retriving user information'})
     })
-
-    }
-    
+    }  
 
 }
 //update a new identified user by user id
@@ -63,17 +62,22 @@ exports.update=(req,res)=>{
 
 }
 //Delete a user with specified user id in the request
-exports.delete=(req,res)=>{
-    const id=req.params.id;
-    Userdb.findByIdAndDelete(id)
-    .then(data=>{
-        if(!data){
-            res.status(404).send({message:`Cannot Delete with id: ${id}.Maybe id is wrong`})
-        } else{
-            res.send({message:"user was deleted"})
-        }
-    }).catch(err=>{
-        res.status(500).send({message:"could not delete user with id:" +id})
-    })
-
+exports.delete = (req, res)=>{
+    const id = req.params.id;
+    Userdb.findByIdAndRemove(id)
+       .exec()      
+        .then(data => {
+            if(!data){
+                res.status(404).send({ message : `Cannot Delete with id ${id}. Maybe id is wrong`})
+            }else{
+                res.send({
+                    message : "User was deleted successfully!"
+                })
+            }
+        })
+        .catch(err =>{
+            res.status(500).send({
+                message: "Could not delete User with id=" + id
+            });
+        });
 }

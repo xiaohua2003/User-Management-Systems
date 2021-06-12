@@ -1,14 +1,15 @@
-
+<%for(var i=0; i<users.length; i++){%>
 <tr>
-    <td>ID</td>
-    <td>Name</td>
-    <td>Gender</td>
-    <td>Phone</td>
-    <td>Email</td>
+    <td><%=i+1%></td>
+    <td><%=users[i].name%></td>
+    <td><%=users[i].gender%></td>
+    <td><%=users[i].phone%></td>
+    <td><%=users[i].email%></td>
     <td>
-        <a href="/update"class="btn border-shadow update"><span class="text-gradient"><i class="far fa-edit"></i></span></a>
+        <a href="/update?id=<%=users[i]._id%>"class="btn border-shadow update"><span class="text-gradient"><i class="far fa-edit"></i></span></a>
     </td>
     <td>
-        <a href=""class="btn border-shadow delete"><span class="text-gradient"><i class="fas fa-trash"></i></span></a>   
+        <a href=""class="btn border-shadow delete" data-id=<%=users[i]._id%>><span class="text-gradient"><i class="fas fa-trash"></i></span></a>   
     </td>
 </tr>
+<%}%>
