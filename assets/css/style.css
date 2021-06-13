@@ -149,3 +149,8 @@ table {
   background-color: #47597e;
   color: var(--border);
 }
+.Footer {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-top: 15%;
+}
